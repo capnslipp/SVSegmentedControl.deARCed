@@ -1,4 +1,4 @@
-# SVSegmentedControl
+# SVSegmentedControl _(de-ARCed)_
 
 SVSegmentedControl is a customizable `UIControl` class that mimics `UISegmentedControl` but that looks like an `UISwitch`.
 
@@ -8,13 +8,13 @@ SVSegmentedControl is a customizable `UIControl` class that mimics `UISegmentedC
 
 ### From CocoaPods
 
-Add `pod 'SVSegmentedControl'` to your Podfile or `pod 'SVSegmentedControl', :head` if you're feeling adventurous.
+Add `pod 'SVSegmentedControl.deARCed'` to your Podfile or `pod 'SVSegmentedControl.deARCed', :head` if you're feeling adventurous.
 
 ### Manually
 
-_**Important note if your project doesn't use ARC**: you must add the `-fobjc-arc` compiler flag to `SVSegmentedControl.m` and `SVSegmentedThumb.m` in Target Settings > Build Phases > Compile Sources._
+_**Important note if your project uses ARC**: you're probably better off using the original [SVSegmentedControl](https://github.com/samvermette/SVSegmentedControl)._
 
-* Drag the `SVSegmentedControl/SVSegmentedControl ` folder into your project. 
+* Drag the `SVSegmentedControl.deARCed/SVSegmentedControl ` folder into your project. 
 * Add the **QuartzCore** framework to your project.
 
 ## Usage
@@ -24,7 +24,7 @@ _**Important note if your project doesn't use ARC**: you must add the `-fobjc-ar
 In its simplest form, this is how you create an SVSegmentedControl instance:
 
 ```objective-c
-segmentedControl = [[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Section 1", @"Section 2", nil]];
+segmentedControl = [[[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Section 1", @"Section 2", nil]] autorelease];
 segmentedControl.changeHandler = ^(NSUInteger newIndex) {
     // respond to index change
 };
@@ -111,3 +111,5 @@ Providing an action method ending with a semicolon, the sender object is therefo
 ## Credits
 
 SVSegmentedControl is brought to you by [Sam Vermette](http://samvermette.com) and [contributors to the project](https://github.com/samvermette/SVSegmentedControl/contributors). If you have feature suggestions or bug reports, feel free to help out by sending pull requests or by [creating new issues](https://github.com/samvermette/SVSegmentedControl/issues/new). If you're using SVSegmentedControl in your project, attribution would be nice. 
+
+As it stands, [Slipp D.](https://github.com/slippyd/) is maintaining the de-ARC-ification of this parallel fork. If you have memory management related issues with this library, [create an issue in this de-ARCed fork](https://github.com/slippyd/SVSegmentedControl.deARCed/issues/new). If in doubt, create an issue there and Slipp will pass it on if necessary.
