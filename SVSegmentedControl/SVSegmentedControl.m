@@ -96,6 +96,25 @@
 	return self;
 }
 
+- (void)dealloc {
+    self.sectionTitles = nil;
+    self.sectionImages = nil;
+    
+    self.thumb = nil;
+    self.thumbRects = nil;
+    self.accessibilityElements = nil;
+    
+    self.backgroundTintColor = nil;
+    self.backgroundImage = nil;
+    
+    self.font = nil;
+    self.textColor = nil;
+    self.textShadowColor = nil;
+    self.innerShadowColor = nil;
+    
+    [super dealloc];
+}
+
 - (SVSegmentedThumb *)thumb {
     
     if(_thumb == nil)
@@ -139,7 +158,7 @@
     self.thumbHeight = self.thumb.backgroundImage ? self.thumb.backgroundImage.size.height : self.height-(self.thumbEdgeInset.top+self.thumbEdgeInset.bottom);
     
     i = 0;
-    self.thumbRects = [NSMutableArray new];
+    self.thumbRects = [[NSMutableArray new] autorelease];
 	for(NSString *titleString in self.sectionTitles) {
         CGRect thumbRect = CGRectMake(self.segmentWidth*i, 0, self.segmentWidth, self.bounds.size.height);
         thumbRect.size.width+=10; // 5px drop shadow on each side
@@ -194,6 +213,7 @@
         element.accessibilityHint = [NSString stringWithFormat:NSLocalizedString(@"Tab %d of %d",), i + 1, self.sectionTitles.count];
         
         [self.accessibilityElements addObject:element];
+        [element release];
         i++;
     }
 }
@@ -449,7 +469,8 @@
 - (void)setSectionTitles:(NSArray *)sectionTitles
 {
     if (_sectionTitles != sectionTitles) {
-        _sectionTitles = sectionTitles;
+        [_sectionTitles release];
+        _sectionTitles = [sectionTitles retain];
         if (self.selectedSegmentIndex < _sectionTitles.count) {
             
         } else {
@@ -464,11 +485,13 @@
 
 - (void)setBackgroundImage:(UIImage *)newImage {
     
-    if(_backgroundImage)
+    if(_backgroundImage) {
+        [_backgroundImage release];
         _backgroundImage = nil;
+    }
     
     if(newImage) {
-        _backgroundImage = newImage;
+        _backgroundImage = [newImage retain];
         self.height = _backgroundImage.size.height;
     }
 }

@@ -62,6 +62,28 @@
     return self;
 }
 
+- (void)dealloc {
+    self.backgroundImage = nil;
+    self.highlightedBackgroundImage = nil;
+    
+    self.tintColor = nil;
+    self.textColor = nil;
+    self.textShadowColor = nil;
+    
+    self.thumbBackgroundImageView = nil;
+    
+    [_firstLabel release];
+    _firstLabel = nil;
+    [_secondLabel release];
+    _secondLabel = nil;
+    [_firstImageView release];
+    _firstImageView = nil;
+    [_secondImageView release];
+    _secondImageView = nil;
+    
+    [super dealloc];
+}
+
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event {
     CGRect bounds = self.bounds;
     return CGRectContainsPoint(CGRectMake(bounds.origin.x - self.segmentedControl.touchTargetMargins.left,
@@ -299,11 +321,13 @@
 
 - (void)setBackgroundImage:(UIImage *)newImage {
     
-    if(backgroundImage)
+    if(backgroundImage) {
+        [backgroundImage release];
         backgroundImage = nil;
+    }
     
     if(newImage) {
-        backgroundImage = newImage;
+        backgroundImage = [newImage retain];
         self.shouldCastShadow = NO;
     } else {
         self.shouldCastShadow = YES;
@@ -312,11 +336,13 @@
 
 - (void)setTintColor:(UIColor *)newColor {
     
-    if(tintColor)
+    if(tintColor) {
+        [tintColor release];
         tintColor = nil;
+    }
 	
 	if(newColor)
-		tintColor = newColor;
+		tintColor = [newColor retain];
 
 	[self setNeedsDisplay];
 }
@@ -327,13 +353,15 @@
 }
 
 - (void)setTextColor:(UIColor *)newColor {
-    textColor = newColor;
+    [textColor release];
+    textColor = [newColor retain];
 	self.label.textColor = newColor;
     self.secondLabel.textColor = newColor;
 }
 
 - (void)setTextShadowColor:(UIColor *)newColor {
-    textShadowColor = newColor;
+    [textShadowColor release];
+    textShadowColor = [newColor retain];
 	self.label.shadowColor = newColor;
     self.secondLabel.shadowColor = newColor;
     self.imageView.layer.shadowColor = newColor.CGColor;

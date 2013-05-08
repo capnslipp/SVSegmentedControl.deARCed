@@ -17,7 +17,7 @@
 	
 	// 1st CONTROL
 	
-	SVSegmentedControl *navSC = [[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Section 1", @"Section 2", nil]];
+	SVSegmentedControl *navSC = [[[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Section 1", @"Section 2", nil]] autorelease];
     navSC.changeHandler = ^(NSUInteger newIndex) {
         NSLog(@"segmentedControl did select index %i (via block handler)", newIndex);
     };
@@ -28,7 +28,7 @@
 	
 	
 	// 2nd CONTROL
-	SVSegmentedControl *redSC = [[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"About", @"Help", @"Credits", nil]];
+	SVSegmentedControl *redSC = [[[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"About", @"Help", @"Credits", nil]] autorelease];
     [redSC addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 	redSC.crossFadeLabelsOnDrag = YES;
 	redSC.thumb.tintColor = [UIColor colorWithRed:0.6 green:0.2 blue:0.2 alpha:1];
@@ -40,7 +40,7 @@
 	
 	
 	// 3rd CONTROL
-	SVSegmentedControl *grayRC = [[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Section 1", @"Section 2", nil]];
+	SVSegmentedControl *grayRC = [[[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"Section 1", @"Section 2", nil]] autorelease];
     [grayRC addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 	grayRC.font = [UIFont boldSystemFontOfSize:19];
 	grayRC.titleEdgeInsets = UIEdgeInsetsMake(0, 14, 0, 14);
@@ -54,7 +54,7 @@
 	
 	
 	// 4th CONTROL
-	SVSegmentedControl *yellowRC = [[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"One", @"Two", @"Three", nil]];
+	SVSegmentedControl *yellowRC = [[[SVSegmentedControl alloc] initWithSectionTitles:[NSArray arrayWithObjects:@"One", @"Two", @"Three", nil]] autorelease];
     [yellowRC addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
 	yellowRC.crossFadeLabelsOnDrag = YES;
 	yellowRC.font = [UIFont fontWithName:@"Marker Felt" size:20];
